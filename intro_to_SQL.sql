@@ -17,14 +17,13 @@ WHERE fjtap IS NOT NULL;
 
 --What is the average number of new jobs for each county_tier?
 
-SELECT AVG(new_jobs)
+SELECT county_tier, ROUND(AVG(new_jobs), 2) AS avg_new_jobs
 FROM ecd
-GROUP BY county_tier;
+GROUP BY county_tier
+ORDER BY county_tier;
 
 -- How many companies are LLCs? Call this value llc_companies.
 
 SELECT COUNT(DISTINCT company) AS llc_companies
 FROM ecd
 WHERE UPPER(company) LIKE '%LLC%';
-
-

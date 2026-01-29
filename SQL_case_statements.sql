@@ -21,7 +21,7 @@ WHERE year = 2017;
 SELECT company, landed, new_jobs,
 	CASE
 		WHEN new_jobs < 50 THEN 'small startup'
-		WHEN new_jobs >= 50 AND new_jobs <= 100 THEN 'medium startup'
+		WHEN new_jobs >= 50 AND new_jobs <= 100 THEN 'midsize startup'
 		WHEN new_jobs > 100 THEN 'large startup'
 	END AS startup_size
 FROM ecd
@@ -30,6 +30,6 @@ WHERE project_type = 'New Startup';
 -- Write a query using the population table to find the total population for 2010 and 2017, labeled as Total_Pop_2010 and Total_Pop_2017.
 
 SELECT
-	SUM(CASE WHEN year = 2010 THEN population END) AS Total_Pop_2010,
-	SUM(CASE WHEN year = 2017 THEN population END) AS Total_Pop_2017
+	SUM(CASE WHEN year = 2010 THEN population END) AS total_pop_2010,
+	SUM(CASE WHEN year = 2017 THEN population END) AS total_pop_2017
 FROM population;

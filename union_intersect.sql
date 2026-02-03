@@ -1,12 +1,12 @@
 -- Find Athletes from Summer or Winter Games
 -- Write a query to list all athlete names who participated in the Summer or Winter Olympics. Ensure no duplicates appear in the final table using a set theory clause.
 
-(SELECT name, 'Summer' AS season
+(SELECT name, athlete_id, 'Summer' AS season
 FROM athletes
 INNER JOIN summer_games
 ON id = athlete_id)
 UNION
-(SELECT name, 'Winter' AS season
+(SELECT name, athlete_id, 'Winter' AS season
 FROM athletes
 INNER JOIN winter_games
 ON id = athlete_id);
@@ -42,15 +42,15 @@ WHERE cs.year = '2016-01-01';
 
 -- Use a set theory clause to combine the results.
 
-(SELECT DISTINCT c.country, cs.pop_in_millions AS pop_2016
+(SELECT c.country, cs.pop_in_millions AS pop_2016
 FROM summer_games AS sg
 INNER JOIN countries AS c
 ON sg.country_id = id
 INNER JOIN country_stats AS cs
 ON id = cs.country_id
 WHERE cs.year = '2016-01-01')
-UNION
-(SELECT DISTINCT c.country, cs.pop_in_millions AS pop_2016
+INTERSECT
+(SELECT c.country, cs.pop_in_millions AS pop_2016
 FROM winter_games AS wg
 INNER JOIN countries AS c
 ON wg.country_id = id
